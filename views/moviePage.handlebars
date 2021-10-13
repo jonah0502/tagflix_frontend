@@ -1,0 +1,124 @@
+<main class="main">
+    <div class="left">
+      <div class="content">
+        <img class="poster" src="{{posterUrl}}">
+        <div class="line">
+          <p>Rated: {{rated}}</p>
+          <img class="icon" src="/imdb_icon.svg"><p>{{imdb}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="top">
+        <span class="movie-title">{{title}}</span>
+        <span class="director">Directed by: {{director}}</span>
+        <div class="year">{{year}}</div>
+
+        <p class="plot-text">{{fullPlot}}</p>
+
+        <h3>Genres</h3>
+        <p class="genres">{{genres}}</p>
+
+        <div class="tags">
+          <h3>Tags</h3>
+          <p>{{tags}}</p>
+          <button type="button" id="add-tag-button">Add Tag</button>
+        </div>
+      </div>
+
+      <div class="reviews">
+        <h3 class="review-label">User Reviews</h3>
+        <div class="review-container">
+          {{#each reviews}}
+            {{> review}}
+          {{/each}}
+
+          {{#unless reviews}}
+            <p>This movie doesn't have reviews yet! Add one!</p>
+          {{/unless}}
+        </div>
+        <button type="button" id="add-review-button">Post Review</button>
+      </div>
+    </div>
+  </main>
+
+  <div id="modal-backdrop" class="hidden"></div>
+  <div id="add-tag-modal" class="hidden">
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+        <h3>Add a Tag</h3>
+        <button type="button" class="modal-close-button">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="input-element">
+          <label for="new-tags-input">Tags:</label>
+          <input id="new-tags-input" placeholder="e.g. funny thrilling..."></input>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-button">Cancel</button>
+        <button type="button" class="modal-accept-button">Add Tag</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="add-review-modal" class="hidden">
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+        <h3>Add a Review</h3>
+        <button type="button" class="modal-close-button">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="input-element">
+          <label for="review-text-input">Review</label>
+          <textarea id="review-text-input"></textarea>
+        </div>
+        <div class="input-element">
+          <label for="review-author-input">User ID</label>
+          <input type="text" id="review-userid-input">
+        </div>
+        <div class="input-element">
+          <label for="review-userid-input">Username</label>
+          <input type="text" id="review-username-input">
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-button">Cancel</button>
+        <button type="button" class="modal-accept-button">Post Review</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="delete-review-modal" class="hidden">
+    <div class="modal-dialog">
+
+      <div class="modal-header">
+        <h3>Delete a Review</h3>
+        <button type="button" class="modal-close-button">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="input-element">
+          <label for="review-author-input">User ID</label>
+          <input type="text" id="delete-userid-input">
+        </div>
+        <div class="input-element">
+          <label for="review-userid-input">Username</label>
+          <input type="text" id="delete-username-input">
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="modal-cancel-button">Cancel</button>
+        <button type="button" class="modal-accept-button">Delete</button>
+      </div>
+    </div>
+  </div>
