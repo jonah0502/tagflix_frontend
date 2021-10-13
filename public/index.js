@@ -36,23 +36,23 @@ searchinput.addEventListener('click', () => {
   filer.toString();
   if(filer.localeCompare("Title") == 0)
   {
-      location.href = '/titles/' + input
+      location.href = '/titles/' + input + '/page/1'
   }
   else if(filer.localeCompare("Genre") == 0)
   {
-    location.href = '/genres/' + input
+    location.href = '/genres/' + input + '/page/1'
   }
   else if(filer.localeCompare("IMDB_Rating") == 0)
   {
-    location.href = '/IMDB/' + input
+    location.href = '/IMDB/' + input + '/page/1'
   }
   else if(filer.localeCompare("Tags") == 0)
   {
-    location.href = '/tags/' + input
+    location.href = '/tags/' + input + '/page/1'
   }
   else if(filer.localeCompare("Year_Range") == 0)
   {
-    location.href = '/Year_Range/' + input
+    location.href = '/Year_Range/' + input + '/page/1'
   }
 
 })
@@ -77,13 +77,13 @@ if (pageButtons.length) {
     currentPage--
     currentPage = currentPage.toString()
 
-    location.href = '/page/' + currentPage
+    location.href = './' + currentPage
   })
   // next page
   pageButtons[1].addEventListener('click', () => {
     var currentPage = parseInt(document.getElementsByClassName('page-number')[0].innerText)
     currentPage++
     currentPage = currentPage.toString()
-    location.href = '/page/' + currentPage
+    location.href = './' + currentPage
   })
 }

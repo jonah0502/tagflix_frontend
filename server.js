@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars')
 const axios = require('axios')
 
 const app = express()
-
+const currentPage = 1
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }))
@@ -78,15 +78,16 @@ app.get('/tagPage', (req, res) => { //pulls all tags and displays on page
 
     res.status(200).render('tags', {
       movies: homeContext,
-      page: (Number(req.params.num))
     })
   }).catch(e => console.log(`error getting tags: ${e}`));
 })
 
 
-app.get('/titles/:title', (req, res) => {
+app.get('/titles/:title/page/:num', (req, res) => {
+  if (parseInt(req.params.num) < 1) req.params.num = 1
+  var queryNum = parseInt(req.params.num) - 1
   var que = '"' + req.params.title + '"'
-  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?title=' + que
+  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?title=' + que + '&page=' + queryNum.toString()
   axios.get(url).then(data => {
     var movieArray = data.data.movies
     console.log(url)
@@ -107,15 +108,18 @@ app.get('/titles/:title', (req, res) => {
       res.status(200).render('no_results')
     } else {
       res.status(200).render('home', {
-        movies: homeContext
+        movies: homeContext,
+        page: (Number(req.params.num))
       })
     }
   })
 })
 
-app.get('/IMDB/:rating', (req, res) => {
+app.get('/IMDB/:rating/page/:num', (req, res) => {
+  if (parseInt(req.params.num) < 1) req.params.num = 1
+  var queryNum = parseInt(req.params.num) - 1
   var que = parseInt(req.params.rating)
-  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?IMDB=' + que.toString()
+  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?IMDB=' + que.toString() + '&page=' + queryNum.toString()
   axios.get(url).then(data => {
     var movieArray = data.data.movies
     var homeContext = []
@@ -133,15 +137,18 @@ app.get('/IMDB/:rating', (req, res) => {
       res.status(200).render('no_results')
     } else {
       res.status(200).render('home', {
-        movies: homeContext
+        movies: homeContext,
+        page: (Number(req.params.num))
       })
     }
   })
 })
 
-app.get('/Year_Range/:years', (req, res) => {
+app.get('/Year_Range/:years/page/:num', (req, res) => {
+  if (parseInt(req.params.num) < 1) req.params.num = 1
+  var queryNum = parseInt(req.params.num) - 1
   var que = req.params.years.toString()
-  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?year_range=' + que
+  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?year_range=' + que + '&page=' + queryNum.toString()
   var values = que.split("_")
   axios.get(url).then(data => {
     var movieArray = data.data.movies
@@ -160,16 +167,19 @@ app.get('/Year_Range/:years', (req, res) => {
       res.status(200).render('no_results')
     } else {
       res.status(200).render('home', {
-        movies: homeContext
+        movies: homeContext,
+        page: (Number(req.params.num))
       })
     }
   })
 })
 
 
-app.get('/genres/:genre', (req, res) => {
+app.get('/genres/:genre/page/:num', (req, res) => {
+  if (parseInt(req.params.num) < 1) req.params.num = 1
+  var queryNum = parseInt(req.params.num) - 1
   var que = req.params.genre
-  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?genre=' + que
+  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?genre=' + que + '&page=' + queryNum.toString()
   axios.get(url).then(data => {
     var movieArray = data.data.movies
     que.toString()
@@ -195,19 +205,22 @@ app.get('/genres/:genre', (req, res) => {
       }
       else{
         res.status(200).render('home', {
-        movies: homeContext
+        movies: homeContext,
+        page: (Number(req.params.num))
       })
       }
   })
 })
 
 
-app.get('/tags/:tag', (req, res) => {
+app.get('/tags/:tag/page/:num', (req, res) => {
+  if (parseInt(req.params.num) < 1) req.params.num = 1
+  var queryNum = parseInt(req.params.num) - 1
   var que = req.params.tag
   if (que.toString().length == 0) {
     res.status(404).render('404pg')
   }
-  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?tag=' + que
+  const url = 'https://taglix-backend.herokuapp.com/api/v1/movies?tag=' + que + '&page=' + queryNum.toString()
   axios.get(url).then(data => {
     var movieArray = data.data.movies
     que.toString()
@@ -233,7 +246,8 @@ app.get('/tags/:tag', (req, res) => {
       res.status(200).render('no_results', {scripts: ["/index.js"]})
     } else {
       res.status(200).render('home', {
-        movies: homeContext
+        movies: homeContext,
+        page: (Number(req.params.num))
       })
     }
   })
