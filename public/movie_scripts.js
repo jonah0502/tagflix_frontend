@@ -23,7 +23,7 @@ var tagAcceptButton = document.getElementsByClassName('modal-accept-button')[0]
 tagCancelButton.addEventListener('click', hideTagModal)
 tagCloseButton.addEventListener('click', hideTagModal)
 tagAcceptButton.addEventListener('click', () => {
-  var url = 'http://localhost:5000/api/v1/movies/tags'
+  var url = 'https://taglix-backend.herokuapp.com/api/v1/movies/tags'
   var request = new XMLHttpRequest()
   request.open('PUT', url)
   request.setRequestHeader('Content-Type', 'application/json')
@@ -67,7 +67,7 @@ addReviewButton.addEventListener('click', () => {
 
   reviewAcceptButton.addEventListener('click', () => {
     var request = new XMLHttpRequest()
-    request.open('POST', 'http://localhost:5000/api/v1/movies/review')
+    request.open('POST', 'https://taglix-backend.herokuapp.com/api/v1/movies/review')
     request.setRequestHeader('Content-Type', 'application/json')
 
 
@@ -133,7 +133,7 @@ Array.from(editButtons).forEach((button) => {
     var reviewAcceptButton = document.getElementsByClassName('modal-accept-button')[1]
     reviewAcceptButton.addEventListener('click', () => {
       var request = new XMLHttpRequest()
-      request.open('PUT', 'http://localhost:5000/api/v1/movies/review')
+      request.open('PUT', 'https://taglix-backend.herokuapp.com/api/v1/movies/review')
       request.setRequestHeader('Content-Type', 'application/json')
 
 
@@ -179,7 +179,7 @@ Array.from(deleteButtons).forEach((button) => {
     var reviewAcceptButton = document.getElementsByClassName('modal-accept-button')[2]
     reviewAcceptButton.addEventListener('click', () => {
       var request = new XMLHttpRequest()
-      request.open('DELETE', 'http://localhost:5000/api/v1/movies/review?id=' + button.id)
+      request.open('DELETE', 'https://taglix-backend.herokuapp.com/api/v1/movies/review?id=' + button.id)
       request.setRequestHeader('Content-Type', 'application/json')
 
 
